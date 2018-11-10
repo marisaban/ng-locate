@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+// add services
 
 import { AppComponent } from './app.component';
 import { ListBanksComponent } from './list-banks/list-banks.component';
@@ -10,9 +13,12 @@ import { ListBanksComponent } from './list-banks/list-banks.component';
     ListBanksComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    // add service
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
