@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 // add services
+import { BranchAPIService } from './branch-api.service';
 
 import { AppComponent } from './app.component';
 import { ListBanksComponent } from './list-banks/list-banks.component';
@@ -17,7 +18,7 @@ import { ListBanksComponent } from './list-banks/list-banks.component';
     HttpClientModule
   ],
   providers: [
-    // add service
+    BranchAPIService
   ],
   bootstrap: [AppComponent]
 })
