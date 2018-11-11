@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <ul *ngFor="let record of records">
-            <li>{{ record.Name }} </li>
-            <li>{{ record.PostalAddress.AddressLine }}</li>
-            <li>{{ record.PostalAddress.GeoLocation.GeographicCoordinates.Latitude }}</li>
-            <li>{{ record.PostalAddress.GeoLocation.GeographicCoordinates.Longtitude }}</li>
-        </ul>
+          <ul class="list-branches" *ngFor="let record of records">
+              <li><a href="#" (click)="toggleView($event)"> {{ record.Name }} </a></li>
+              <!-- <li><a href="#" (click)="toggleView($event)"> {{ record.PostalAddress.GeoLocation.GeographicCoordinates.Latitude }} </a></li> -->
+              <!-- <li><a href="#" (click)="toggleView($event)"> {{ record.PostalAddress.GeoLocation.GeographicCoordinates.Longtitude }} </a></li> -->
+              <!-- <app-view-branch *ngIf="isExpanded"></app-view-branch> -->
+              <app-view-branch></app-view-branch>
+          </ul>
       </div>
     </div>
   </div>
-
