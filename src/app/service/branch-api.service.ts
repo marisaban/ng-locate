@@ -6,7 +6,6 @@ import {throwError} from 'rxjs';
 
 import { Branches } from '../branches';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +15,15 @@ export class BranchAPIService {
 
   constructor(private httpClient: HttpClient) { }
     // return the api can manipulate it in my component ts file
-    getBranches(): Observable<Branches[]> {
-      return this.httpClient.get<Branches[]>(this.url); 
+    // getBranches(): Observable<Branches[]> {
+    //   return this.httpClient.get<Branches[]>(this.url); 
+    // }
+
+    // in order to get the data to your template, you need to subscribe the data on your component.ts file
+    // not your service file 
+
+    getData() {
+      return this.httpClient.get<myData[]>(this.url);
     }
 
 }

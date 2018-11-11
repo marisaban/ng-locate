@@ -10,9 +10,4 @@ export class BranchListService {
 
   constructor(private branchAPIService: BranchAPIService) { }
 
-  do() {
-    this.branchAPIService.getBranches()
-        .subscribe(data => this.branches = data);
-  }
-
 }
