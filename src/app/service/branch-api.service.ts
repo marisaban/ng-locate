@@ -11,7 +11,8 @@ import { Branches } from '../branches';
   providedIn: 'root'
 })
 export class BranchAPIService {
-  private url: string = 'https://api.halifax.co.uk/open-banking/v2.2/branches';
+  // private url: string = 'https://api.halifax.co.uk/open-banking/v2.2/branches';
+  private url: string = 'https://api.github.com/users/marisaban';
   branches: Branches[] = [];
 
   constructor(private httpClient: HttpClient) { }
@@ -20,9 +21,6 @@ export class BranchAPIService {
   // }
 
   getBranches() {
-    return this.httpClient.get(this.url)
-      .pipe(map((data: any) => data.result ), 
-      catchError(error => { return throwError('Its a Trap!')})
-      );
+    return this.httpClient.get(this.url);
   }
 }
