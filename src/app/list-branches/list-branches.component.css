@@ -1,0 +1,17 @@
+.list-branches {
+    padding-left: 0;
+    display: block;
+    width: 1000px;
+}
+
+.list-branches li {
+    list-style: none;
+    border: 1px #dcdbdb solid;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.list-branches li a {
+    display: block;
+    width: 100%;
+}

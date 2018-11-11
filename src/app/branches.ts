@@ -5,10 +5,4 @@ export class Branch {
 
 export class Branches {
     name: string;
-    // open: number, 
-    // contact: string,
-    // address: string,
-    // country: string,
-    // postcode: string,
-    // geolocation: any
   }

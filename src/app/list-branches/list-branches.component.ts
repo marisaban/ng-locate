@@ -1,39 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BranchListService } from '../branch-list.service';
+import { BranchListService } from '../service/branch-list.service';
 
 // for testing
-import { BranchAPIService } from '../branch-api.service';
+import { BranchAPIService } from '../service/branch-api.service';
 import { Branches } from '../branches'
 
 import { map, take } from 'rxjs/operators';
 
-
-
 @Component({
-  selector: 'app-list-banks',
-  templateUrl: './list-banks.component.html',
-  styleUrls: ['./list-banks.component.css'],
+  selector: 'app-list-branches',
+  templateUrl: './list-branches.component.html',
+  styleUrls: ['./list-branches.component.css'],
   providers: [BranchListService]
 })
-export class ListBanksComponent implements OnInit {
+export class ListBranchesComponent implements OnInit {
 
   branches: Branches[] = [];
 
   constructor(private branchListService: BranchListService, private branchAPIService: BranchAPIService) { }
+
+  public isExpanded: boolean;
 
   ngOnInit() {
     this.do();
   }
 
   do() {
-    // this.branchAPIService.getBranches()
-    // .subscribe(
-    //   data => {
-    //     this.branches = data;
-    //     console.log(this.branches);
-    //   });
-
     this.branchAPIService.getBranches().subscribe(
       data => {
         this.branches = data
@@ -42,6 +35,10 @@ export class ListBanksComponent implements OnInit {
       () => console.log('hi')
     );
     console.log(this.branches)
+  }
+
+  toggleView(){
+    this.isExpanded = !this.isExpanded;
   }
 
 }

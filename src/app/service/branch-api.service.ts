@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {catchError, map, take} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
-import { Branches } from './branches';
+import { Branches } from '../branches';
 
 
 @Injectable({
