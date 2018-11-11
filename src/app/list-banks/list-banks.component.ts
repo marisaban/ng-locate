@@ -6,6 +6,8 @@ import { BranchListService } from '../branch-list.service';
 import { BranchAPIService } from '../branch-api.service';
 import { Branches } from '../branches'
 
+import { map, take } from 'rxjs/operators';
+
 
 
 @Component({
@@ -16,8 +18,7 @@ import { Branches } from '../branches'
 })
 export class ListBanksComponent implements OnInit {
 
-  // remove after testing
-  branches: Branches[];
+  branches: Branches[] = [];
 
   constructor(private branchListService: BranchListService, private branchAPIService: BranchAPIService) { }
 
@@ -26,12 +27,21 @@ export class ListBanksComponent implements OnInit {
   }
 
   do() {
-    this.branchAPIService.getBranches()
-    .subscribe(
+    // this.branchAPIService.getBranches()
+    // .subscribe(
+    //   data => {
+    //     this.branches = data;
+    //     console.log(this.branches);
+    //   });
+
+    this.branchAPIService.getBranches().subscribe(
       data => {
-        this.branches = data;
-        console.log(this.branches);
-      });
+        this.branches = data
+      },
+      err => console.error(err),
+      () => console.log('hi')
+    );
+    console.log(this.branches)
   }
 
 }
