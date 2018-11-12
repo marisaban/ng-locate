@@ -18,6 +18,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 import { AgmCoreModule } from '@agm/core';
 import { SearchBranchesComponent } from './search-branches/search-branches.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // Add an icon to the library for convenient access in other components
 library.add(faCoffee);
@@ -35,6 +36,7 @@ library.add(faCoffee);
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
+    NgxPaginationModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBQSGkpHKdToePWcV1Ot4FSYhjmIFs3TIQ'
     })

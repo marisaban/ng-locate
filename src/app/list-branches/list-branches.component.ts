@@ -21,6 +21,7 @@ export class ListBranchesComponent implements OnInit {
 
   records = [];
   cities = [];
+  p: number = 1;
 
   constructor(private branchAPIService: BranchAPIService) { }
 
