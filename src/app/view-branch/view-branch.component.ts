@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 import { BranchAPIService } from '../service/branch-api.service';
 
@@ -16,7 +15,6 @@ interface myData {
   styleUrls: ['./view-branch.component.css']
 })
 export class ViewBranchComponent implements OnInit {
-  faCoffee = faCoffee;
   records = [];
   address = [];
 
@@ -36,9 +34,9 @@ export class ViewBranchComponent implements OnInit {
       })
   }
 
-  // get Address record.PostalAddress.AddressLine
   setAddress(record) {
-    record._streetAddress = record.PostalAddress;
+    // removing .PostalAddress
+    record._streetAddress = record;
     this.address.push(record._streetAddress);
     this.address.sort();
     //console.log(record._streetAddress);
