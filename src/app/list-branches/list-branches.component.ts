@@ -5,9 +5,9 @@ import { BranchAPIService } from '../service/branch-api.service';
 //import { myData } from '../data'
 
 interface myData {
-  data: Object,
-  brand: Object,
-  branch: Object
+  data: any,
+  brand: any,
+  branch: any
 }
 
 @Component({
@@ -19,6 +19,7 @@ interface myData {
 export class ListBranchesComponent implements OnInit {
 
   records = [];
+  dataObj = '.data[0].Brand[0].Branch';
 
   constructor(private branchAPIService: BranchAPIService) { }
 

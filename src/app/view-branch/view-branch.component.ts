@@ -21,11 +21,11 @@ export class ViewBranchComponent implements OnInit {
   constructor(private branchAPIService: BranchAPIService) { }
 
   ngOnInit() {
-    this.branchAPIService.getData()
-    .subscribe(data => {
-      this.records = data.data[0].Brand[0].Branch
-      console.log(data.data[0].Brand[0].Branch[0].PostalAddress);
-    })
+    // this.branchAPIService.getData()
+    // .subscribe(data => {
+    //   this.records = data.data[0].Brand[0].Branch
+    //   //console.log(data.data[0].Brand[0].Branch[0].PostalAddress);
+    // })
   }
 
 }
