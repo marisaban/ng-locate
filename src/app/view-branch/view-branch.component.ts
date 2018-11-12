@@ -18,38 +18,31 @@ interface myData {
 export class ViewBranchComponent implements OnInit {
   faCoffee = faCoffee;
   records = [];
+  address = [];
 
   constructor(private branchAPIService: BranchAPIService) { }
 
   ngOnInit() {
     this.branchAPIService.getData()
-    .subscribe(data => {
-      const branches = data.data[0].Brand[0].Branch;
-      branches.forEach(record => {
-        this.records = record;
-        //console.log('records', record);
-    })
+      .subscribe(data => {
+        const branches = data.data[0].Brand[0].Branch;
+        branches.forEach(record => {
+          this.setAddress(record);
+          this.records = this.setAddress(record);
+          //console.log(this.records);
+        })
+         //this.records = data;
+       //console.log(this.records);
+      })
   }
 
-  // ngOnInit() {
-  //   this.branchAPIService.getData()
-  //   .subscribe(data => {
-  //     this.records = data;
-  //     console.log('records', this.records);
-  //   })
-  // }
-
-  // ngOnInit() {
-  //   this.branchAPIService.getData()
-  //   .subscribe(data => {
-  //     const branches = data.data[0].Brand[0].Branch;
-  //     // branches.forEach(record => {
-  //     //   console.log(branches)
-  //     // })
-  //     // prints out the cities not in order
-  //     this.records = data.data[0].Brand[0].Branch
-  //     console.log("fasfdsa");
-  //   })
-  // }
+  // get Address record.PostalAddress.AddressLine
+  setAddress(record) {
+    record._streetAddress = record.PostalAddress;
+    this.address.push(record._streetAddress);
+    this.address.sort();
+    //console.log(record._streetAddress);
+    return this.address;
+  }
 
 }

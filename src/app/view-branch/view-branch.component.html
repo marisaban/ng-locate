@@ -1,19 +1,21 @@
 <div class="container view-branch">
   <div class="row">
-    <div class="col-md-12" *ngFor="let record of records">
+    <div class="col-md-12">
       <div class="header">
-        <h2 class="title"> {{ record.Name }} </h2>
-        <!-- <p> <span class="label">Address: </span> {{ record }} </p> -->
-        <!-- <p> <span class="label">Branch Code: </span> {{ record.branch }} </p>  -->
+        <div class="street-name" *ngFor="let record of records; let i = index">
+          <h2 class="title" *ngIf="i<1"> {{ record.AddressLine }} </h2>
+          <p *ngIf="i<1"> <span class="label">Address: </span> {{ record.AddressLine }}, {{ record.TownName }}, {{ record.PostCode }}, {{ record.CountrySubDivision }}, {{ record.Country }}</p> 
+        </div> 
         <p> <span class="label">Working Hours: </span> </p>
 
         <div class="hours">
-          <p> <fa-icon [icon]="faCoffee"></fa-icon> Monday: 09:00 - 17:00 </p>
+          <p> Monday: 09:00 - 17:00 </p>
         </div>
 
         <div class="contact">
           <p> <span class="label">Contact Info: </span> </p>
-          <p>  <fa-icon [icon]="faCoffee"></fa-icon> +44-1224809067 </p>
+          <p>  <span class="label">Phone Number: </span> +44-1224809067 </p>
+          <p>  <span class="label">Fax Number: </span> +44-1224809067 </p>
         </div>
       </div>
 

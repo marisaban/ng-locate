@@ -34,6 +34,7 @@ export class ListBranchesComponent implements OnInit {
         this.setGeo(record);
         this.records = this.setCity(record);
       })
+      console.log(data);
     })
   }
 
