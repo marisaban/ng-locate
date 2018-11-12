@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
       <div class="col-md-12">
-          <ul class="list-branches" *ngFor="let record of records">
-              <li><a href="#" (click)="toggleView($event)"> {{ record.Name }} </a></li>
+          <ul class="list-branches" *ngFor="let record of records; let i=index">
+              <li *ngIf="i<26"><a href="#" (click)="toggleView($event)"> {{ record }}  </a></li>
               <!-- <li><a href="#" (click)="toggleView($event)"> {{ record.PostalAddress.GeoLocation.GeographicCoordinates.Latitude }} </a></li> -->
               <!-- <li><a href="#" (click)="toggleView($event)"> {{ record.PostalAddress.GeoLocation.GeographicCoordinates.Longtitude }} </a></li> -->
               <!-- <app-view-branch *ngIf="isExpanded"></app-view-branch> -->

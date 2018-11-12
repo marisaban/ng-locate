@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BranchAPIService } from '../service/branch-api.service';
 
-//import { myData } from '../data'
+import * as _ from 'lodash';
 
 interface myData {
   data: any,
@@ -20,6 +20,7 @@ interface myData {
 export class ListBranchesComponent implements OnInit {
 
   records = [];
+  cities = [];
 
   constructor(private branchAPIService: BranchAPIService) { }
 
@@ -29,11 +30,14 @@ export class ListBranchesComponent implements OnInit {
     this.branchAPIService.getData()
     .subscribe(data => {
       const branches = data.data[0].Brand[0].Branch;
-
       branches.forEach(record => {
+        this.setCity(record);
         this.setGeo(record);
+        this.records = this.setCity(record);
       })
-      this.records = data.data[0].Brand[0].Branch
+      // prints out the cities not in order
+      //this.records = data.data[0].Brand[0].Branch
+      //console.log(this.records);
     })
   }
 
@@ -42,8 +46,14 @@ export class ListBranchesComponent implements OnInit {
     const geoCoords = record.PostalAddress && record.PostalAddress.GeoLocation && record.PostalAddress.GeoLocation.GeographicCoordinates;
     if (geoCoords) {
       record._geolocation = [geoCoords.Latitude, geoCoords.Longitude];
-      console.log(record._geolocation);
     }
+  }
+
+  setCity(record) {
+    record._cityName = record.Name;
+    this.cities.push(record._cityName);
+    this.cities.sort();
+    return this.cities;
   }
 
   // toggleView(){

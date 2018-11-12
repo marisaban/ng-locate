@@ -1,6 +1,6 @@
 interface myData {
-    data: Object,
-    brand: Object,
-    branch: Object
-  }
-  
+  data: any,
+  brand: any,
+  branch: any,
+  postaladdress: any;
+}
