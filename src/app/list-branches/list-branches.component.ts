@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { BranchAPIService } from '../service/branch-api.service';
 
-import * as _ from 'lodash';
-
 interface myData {
   data: any,
   brand: any,
@@ -22,6 +20,8 @@ export class ListBranchesComponent implements OnInit {
   records = [];
   cities = [];
   p: number = 1;
+  hideme = [];
+  
 
   constructor(private branchAPIService: BranchAPIService) { }
 
@@ -56,11 +56,6 @@ export class ListBranchesComponent implements OnInit {
     this.cities.sort();
     return this.cities;
   }
-
-  // toggleView(){
-  //   this.isExpanded = !this.isExpanded;
-  // }
-
 }
 
 

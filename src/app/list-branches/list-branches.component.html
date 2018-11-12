@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
       <div class="col-md-12">
-          <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p }">
-              <li><a href="#" (click)="toggleView($event)"> {{ record }}  </a></li>
+          <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
+              <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record }}  </a></li>
               <!-- <li><a href="#" (click)="toggleView($event)"> {{ record.PostalAddress.GeoLocation.GeographicCoordinates.Latitude }} </a></li> -->
               <!-- <li><a href="#" (click)="toggleView($event)"> {{ record.PostalAddress.GeoLocation.GeographicCoordinates.Longtitude }} </a></li> -->
-              <!-- <app-view-branch *ngIf="isExpanded"></app-view-branch> -->
+              <app-view-branch [hidden]="!hideme[i]"></app-view-branch>
           </ul>
       </div>
     </div>
