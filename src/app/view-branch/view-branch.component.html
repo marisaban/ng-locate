@@ -1,10 +1,10 @@
 <div class="container view-branch">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" *ngFor="let record of records">
       <div class="header">
-        <!-- <h2 class="title"> {{ record.Name }} </h2>
-        <p> <span class="label">Address: </span> {{ record.PostalAddress }} </p>
-        <p> <span class="label">Branch Code: </span> {{ record.branch }} </p> -->
+        <h2 class="title"> {{ record.Name }} </h2>
+        <!-- <p> <span class="label">Address: </span> {{ record }} </p> -->
+        <!-- <p> <span class="label">Branch Code: </span> {{ record.branch }} </p>  -->
         <p> <span class="label">Working Hours: </span> </p>
 
         <div class="hours">

@@ -4,9 +4,10 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { BranchAPIService } from '../service/branch-api.service';
 
 interface myData {
-  data: Object,
-  brand: Object,
-  branch: Object
+  data: any,
+  brand: any,
+  branch: any,
+  postaladdress: any;
 }
 
 @Component({
@@ -21,11 +22,34 @@ export class ViewBranchComponent implements OnInit {
   constructor(private branchAPIService: BranchAPIService) { }
 
   ngOnInit() {
-    // this.branchAPIService.getData()
-    // .subscribe(data => {
-    //   this.records = data.data[0].Brand[0].Branch
-    //   //console.log(data.data[0].Brand[0].Branch[0].PostalAddress);
-    // })
+    this.branchAPIService.getData()
+    .subscribe(data => {
+      const branches = data.data[0].Brand[0].Branch;
+      branches.forEach(record => {
+        this.records = record;
+        //console.log('records', record);
+    })
   }
+
+  // ngOnInit() {
+  //   this.branchAPIService.getData()
+  //   .subscribe(data => {
+  //     this.records = data;
+  //     console.log('records', this.records);
+  //   })
+  // }
+
+  // ngOnInit() {
+  //   this.branchAPIService.getData()
+  //   .subscribe(data => {
+  //     const branches = data.data[0].Brand[0].Branch;
+  //     // branches.forEach(record => {
+  //     //   console.log(branches)
+  //     // })
+  //     // prints out the cities not in order
+  //     this.records = data.data[0].Brand[0].Branch
+  //     console.log("fasfdsa");
+  //   })
+  // }
 
 }

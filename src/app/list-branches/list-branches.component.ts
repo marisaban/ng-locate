@@ -25,8 +25,6 @@ export class ListBranchesComponent implements OnInit {
 
   constructor(private branchAPIService: BranchAPIService) { }
 
-  //public isExpanded: boolean;
-
   ngOnInit() {
     this.branchAPIService.getData()
     .subscribe(data => {
@@ -36,9 +34,6 @@ export class ListBranchesComponent implements OnInit {
         this.setGeo(record);
         this.records = this.setCity(record);
       })
-      // prints out the cities not in order
-      //this.records = data.data[0].Brand[0].Branch
-      //console.log(this.records);
     })
   }
 
