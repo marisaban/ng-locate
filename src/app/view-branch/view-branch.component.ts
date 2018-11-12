@@ -27,7 +27,6 @@ export class ViewBranchComponent implements OnInit {
         branches.forEach(record => {
           this.setAddress(record);
           this.records = this.setAddress(record);
-          //console.log(this.records);
         })
          //this.records = data;
        //console.log(this.records);
@@ -39,8 +38,6 @@ export class ViewBranchComponent implements OnInit {
     record._streetAddress = record;
     this.address.push(record._streetAddress);
     this.address.sort();
-    //console.log(record._streetAddress);
     return this.address;
   }
-
 }

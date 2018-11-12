@@ -21,7 +21,6 @@ export class ListBranchesComponent implements OnInit {
   cities = [];
   p: number = 1;
   hideme = [];
-  
 
   constructor(private branchAPIService: BranchAPIService) { }
 
@@ -31,27 +30,18 @@ export class ListBranchesComponent implements OnInit {
       const branches = data.data[0].Brand[0].Branch;
       branches.forEach(record => {
         this.setCity(record);
-        this.setGeo(record);
         this.records = this.setCity(record);
       })
       console.log(data);
     })
   }
 
-  // setGeocoordinates and then add this to its own service 
-  setGeo(record) {
-    const geoCoords = record.PostalAddress && record.PostalAddress.GeoLocation && record.PostalAddress.GeoLocation.GeographicCoordinates;
-    if (geoCoords) {
-      record._geolocation = [geoCoords.Latitude, geoCoords.Longitude];
-    }
-  }
-
   setCity(record) {
     record._cityName = record.Name;
     this.cities.push(record._cityName);
-    this.cities.sort();
     return this.cities;
   }
 }
 
+  
 

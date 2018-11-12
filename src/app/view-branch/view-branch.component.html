@@ -4,7 +4,7 @@
       <div class="header">
         <div class="street-name" *ngFor="let record of records; let i = index">
             <h2 class="title" *ngIf="i<1"> {{ record.Name }} - {{ record.PostalAddress.AddressLine }} </h2>
-          <p *ngIf="i<1"> <span class="label">Address: </span> {{ record.PostalAddress.AddressLine }}, {{ record.PostalAddress.TownName }}, {{ record.PostalAddress.PostCode }}, {{ record.PostalAddress.CountrySubDivision }}, {{ record.PostalAddress.Country }}</p> 
+          <p *ngIf="i<5"> <span class="label">Address: </span> {{ record.PostalAddress.AddressLine }}, {{ record.PostalAddress.TownName }}, {{ record.PostalAddress.PostCode }}, {{ record.PostalAddress.CountrySubDivision }}, {{ record.PostalAddress.Country }}</p> 
         </div> 
 
         <p> <span class="label">Contact Information: </span> </p>
