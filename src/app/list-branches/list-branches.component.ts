@@ -22,11 +22,14 @@ export class ListBranchesComponent implements OnInit {
   p: number = 1;
   hideme = [];
 
+  isLoading: boolean = true;
+
   constructor(private branchAPIService: BranchAPIService) { }
 
   ngOnInit() {
     this.branchAPIService.getData()
     .subscribe(data => {
+      this.isLoading = false;
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(record => {
         this.records = this.assignRecord(record);
