@@ -35,3 +35,16 @@ span.label {
     text-align: center;
     margin: 0 auto;
 }
+
+/* testing purposes */
+input {
+    width: 600px;
+}
+
+button {
+    width: 125px;
+}
+
+.input-search {
+    display: inline-flex;
+}

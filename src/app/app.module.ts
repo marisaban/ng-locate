@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BranchAPIService } from './service/branch-api.service';
 import { BranchListService } from './service/branch-list.service';
@@ -26,6 +26,7 @@ import { CityNamePipe } from './pipe/city-name.pipe';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
     AgmCoreModule.forRoot({
