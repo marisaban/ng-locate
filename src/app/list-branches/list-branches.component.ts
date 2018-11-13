@@ -73,6 +73,7 @@ export class ListBranchesComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("submit!");
     this.searchTerm.push(this.formVar.value);
     // take object and insert in searchTerm array 
     this.getDataFromAPI(this.searchTerm);
