@@ -37,7 +37,8 @@ export class ListBranchesComponent implements OnInit {
   }
 
   setCity(record) {
-    record._cityName = record.Name;
+    // no longer city  name, change variable name
+    record._cityName = record;
     this.cities.push(record._cityName);
     return this.cities;
   }

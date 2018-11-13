@@ -1,11 +1,25 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-          <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
-              <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record }}  </a></li>
-              <app-view-branch [hidden]="!hideme[i]"></app-view-branch>
-          </ul>
-      </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
+        <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record.Name }}  - {{ record.PostalAddress.AddressLine }} </a></li>
+                
+        <div class="branch-details" [hidden]="!hideme[i]">
+          <p> <span class="label">Address: </span> {{ record.PostalAddress.AddressLine }}, {{ record.PostalAddress.TownName }}, {{ record.PostalAddress.PostCode }}, {{ record.PostalAddress.CountrySubDivision }}, {{ record.PostalAddress.Country }}</p> 
+          <p> <span class="label">Contact Information: </span> </p>
+                    
+          <div class="hours" *ngFor="let record of records; let i = index">
+            <p *ngIf="i<2">  <span class="label"> {{ record.ContactInfo[i].ContactType }} </span> {{ record.ContactInfo[i].ContactContent }} </p>
+          </div>
+        
+          <p> <span class="label">Working Hours: </span> </p>
+          <div class="hours" *ngFor="let record of records; let i = index">
+          <p *ngIf="i<5">  <span class="label"> {{ record.Availability.StandardAvailability.Day[i].Name }}: </span>  </p>
+          </div>
+        </div>
+
+      </ul>
     </div>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
