@@ -9,7 +9,6 @@ import { BranchListDetailsService } from './service/branch-list-details.service'
 
 import { AppComponent } from './app.component';
 import { ListBranchesComponent } from './list-branches/list-branches.component';
-import { ViewBranchComponent } from './view-branch/view-branch.component';
 import { ViewBranchMapComponent } from './view-branch-map/view-branch-map.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -27,7 +26,6 @@ library.add(faCoffee);
   declarations: [
     AppComponent,
     ListBranchesComponent,
-    ViewBranchComponent,
     ViewBranchMapComponent,
     SearchBranchesComponent
   ],

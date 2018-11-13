@@ -18,7 +18,7 @@ interface myData {
 export class ListBranchesComponent implements OnInit {
 
   records = [];
-  cities = [];
+  branches = [];
   p: number = 1;
   hideme = [];
 
@@ -27,20 +27,17 @@ export class ListBranchesComponent implements OnInit {
   ngOnInit() {
     this.branchAPIService.getData()
     .subscribe(data => {
-      const branches = data.data[0].Brand[0].Branch;
-      branches.forEach(record => {
-        this.setCity(record);
-        this.records = this.setCity(record);
+      const branchObj = data.data[0].Brand[0].Branch;
+      branchObj.forEach(record => {
+        this.records = this.assignRecord(record);
       })
-      console.log(data);
     })
   }
 
-  setCity(record) {
-    // no longer city  name, change variable name
-    record._cityName = record;
-    this.cities.push(record._cityName);
-    return this.cities;
+  assignRecord(record) {
+    record._recordName = record;
+    this.branches.push(record._recordName);
+    return this.branches;
   }
 }
 
