@@ -5,35 +5,28 @@ import { FormsModule } from '@angular/forms';
 
 import { BranchAPIService } from './service/branch-api.service';
 import { BranchListService } from './service/branch-list.service';
-import { BranchListDetailsService } from './service/branch-list-details.service';
 
 import { AppComponent } from './app.component';
 import { ListBranchesComponent } from './list-branches/list-branches.component';
 import { ViewBranchMapComponent } from './view-branch-map/view-branch-map.component';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-
 import { AgmCoreModule } from '@agm/core';
 import { SearchBranchesComponent } from './search-branches/search-branches.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-
-// Add an icon to the library for convenient access in other components
-library.add(faCoffee);
+import { CityNamePipe } from './pipe/city-name.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListBranchesComponent,
     ViewBranchMapComponent,
-    SearchBranchesComponent
+    SearchBranchesComponent,
+    CityNamePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    FontAwesomeModule,
     NgxPaginationModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBQSGkpHKdToePWcV1Ot4FSYhjmIFs3TIQ'
@@ -42,7 +35,7 @@ library.add(faCoffee);
   providers: [
     BranchAPIService,
     BranchListService,
-    BranchListDetailsService
+    CityNamePipe
   ],
   bootstrap: [AppComponent]
 })

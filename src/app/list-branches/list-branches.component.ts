@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { BranchAPIService } from '../service/branch-api.service';
 
+import { CityNamePipe } from '../pipe/city-name.pipe';
+
 interface myData {
   data: any,
   brand: any,
@@ -24,7 +26,7 @@ export class ListBranchesComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  constructor(private branchAPIService: BranchAPIService) { }
+  constructor(private branchAPIService: BranchAPIService, public cityNamePipe: CityNamePipe) { }
 
   ngOnInit() {
     this.branchAPIService.getData()
