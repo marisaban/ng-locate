@@ -23,36 +23,7 @@ export class ListBranchesComponent implements OnInit {
   isLoading: boolean = true;
 
   // userinput should be saved to this variable 
-  private _keyword: string;
-  // getter
-  get keyword(): string {
-    return this._keyword;
-  }
-  // setter
-  set keyword(value: string) {
-    this._keyword = value;
-    this.filteredRecords = this.filterCities(value);
-  }
-
-  filterCities(searchString: string) {
-    // return this.filteredRecords.filter(record => 
-    //   record.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
-
-    this.branchAPIService.getData()
-    .subscribe(data => {
-      this.isLoading = false;
-      const branchObj = data.data[0].Brand[0].Branch;
-      branchObj.forEach(record => {
-         //this.records = this.assignRecord(record);
-        this.filteredRecords = this.assignRecord(record);
-
-        //console.log(record.Name);
-        return this.filteredRecords.filter(record => 
-          record.Name.indexOf(searchString) !== -1);
-      })
-    })
-
-  }
+  keyword: string;
 
   filters: any = [];
 
@@ -63,24 +34,19 @@ export class ListBranchesComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.getBranches();
-  }
-
-  // getData from api call
-  getBranches() {
     this.branchAPIService.getData()
     .subscribe(data => {
       this.isLoading = false;
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(record => {
-         //this.records = this.assignRecord(record);
-        this.filteredRecords = this.getCity(record);
+         this.records = this.assignRecord(record);
+       // this.filteredRecords = this.getCity(record);
       })
     })
   }
 
   // to match the user input with the city name (will remove after testing)
-  getDataFromAPI(_keyword) {
+  getDataFromAPI(keyword) {
     this.branchAPIService.getData()
     .subscribe(data => {
       const branchObj = data.data[0].Brand[0].Branch;
@@ -88,8 +54,8 @@ export class ListBranchesComponent implements OnInit {
         // returns cities
         this.filters = this.getCity(filter);
         // stops working when filter calls service
-        if (this.filters.includes(this._keyword)) {
-          console.log('WHERE ARE YOU', this.filters.indexOf(this._keyword));
+        if (this.filters.includes(this.keyword)) {
+          console.log('WHERE ARE YOU', this.filters.indexOf(this.keyword));
         }
       })
     })
@@ -97,7 +63,7 @@ export class ListBranchesComponent implements OnInit {
 
   search() {
     if(this.keyword !== '') {
-      this.getDataFromAPI(this._keyword);
+      this.getDataFromAPI(this.keyword);
     }
   }
 
