@@ -9,14 +9,14 @@
       <!-- search testing  -->
       <div class="input-search">
         <form [formGroup]="formVar" >
-            <input type="text"  class="form-control"  placeholder="Enter in your city" formControlName="searchterm" (keydown)="search($event.target.value)"/> 
+            <input type="text"  class="form-control"  placeholder="Enter in your city" [(ngModel)]="test" formControlName="keyword" (keydown)="search($event)"/> 
             <!-- <button (click)="search()">Search</button> -->
         </form>
       </div>
 
       <!-- put into its own component later on -->
       <ul class="list-search" *ngIf="isSearching">
-        <li><a> {{ $event.target.value }} </a></li>
+        <li><a> {{ test }} </a></li>
       </ul>
 
       <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p } | cityName: searchText let i = index">

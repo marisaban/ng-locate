@@ -26,9 +26,6 @@ export class ListBranchesComponent implements OnInit {
   p: number = 1;
   hideme = [];
 
-  // changes it to obj
-  // searchTerms = [];
-
   isLoading: boolean = true;
   isSearching: boolean = false;
 
@@ -55,7 +52,7 @@ export class ListBranchesComponent implements OnInit {
     })
 
     this.formVar = this.fb.group({
-      searchterm: '',
+      keyword: '',
     });
   }
 
@@ -83,9 +80,9 @@ export class ListBranchesComponent implements OnInit {
 
     this.searchTerm.push(this.formVar.value);
 
+
     for (let i = 0; i < this.searchTerm.length; i++) {
-      console.log('your input is', this.searchTerm[i]);
-      
+      //console.log('your input is', this.searchTerm[i]);
       this.isSearching = true;
       
     }
