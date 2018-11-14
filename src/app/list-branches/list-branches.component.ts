@@ -80,9 +80,15 @@ export class ListBranchesComponent implements OnInit {
 
     this.searchTerm.push(this.formVar.value);
 
+    console.log('my new array', this.searchTerm);
+
+    //join
+    this.searchTerm.join();
+
+    console.log('joined array', this.searchTerm);
 
     for (let i = 0; i < this.searchTerm.length; i++) {
-      //console.log('your input is', this.searchTerm[i]);
+     // console.log('your input is', this.searchTerm[i]);
       this.isSearching = true;
       
     }
