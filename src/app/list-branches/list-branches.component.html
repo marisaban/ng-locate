@@ -8,11 +8,16 @@
 
       <!-- search testing  -->
       <div class="input-search">
-        <form [formGroup]="formVar" (ngSubmit)="onSubmit()">
-            <input type="text"  class="form-control"  placeholder="Enter in your city" formControlName="searchterm"/> 
+        <form [formGroup]="formVar" >
+            <input type="text"  class="form-control"  placeholder="Enter in your city" formControlName="searchterm" (keydown)="search($event.target.value)"/> 
             <!-- <button (click)="search()">Search</button> -->
         </form>
       </div>
+
+      <!-- put into its own component later on -->
+      <ul class="list-search" *ngIf="isSearching">
+        <li><a> {{ $event.target.value }} </a></li>
+      </ul>
 
       <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p } | cityName: searchText let i = index">
         <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record.Name }}  - {{ record.PostalAddress.AddressLine }} </a></li>

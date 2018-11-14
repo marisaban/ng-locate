@@ -6,7 +6,7 @@
 
 .list-branches li {
     list-style: none;
-    border: 1px #dcdbdb solid;
+    border-bottom: 1px #dcdbdb solid;
     border-radius: 5px;
     padding: 10px;
 }
@@ -14,6 +14,7 @@
 .list-branches li a {
     display: block;
     width: 100%;
+    color: #71A0CF;
 }
 
 .branch-details{
@@ -23,7 +24,8 @@
 
 .title {
     font-size: 25px;
-    color: #001154;
+    color: #71A0CF;
+    font-weight: bold;
 }
 
 span.label {
@@ -47,4 +49,17 @@ button {
 
 .input-search {
     display: inline-flex;
+}
+
+ul.list-search {
+    border: 1px #dcdbdb solid;
+    width: 600px;
+    padding: 15px 15px;
+}
+
+ul.list-search li {
+    list-style: none;
+    color: #71A0CF;
+    font-weight: bold;
+    margin: 5px 0;
 }

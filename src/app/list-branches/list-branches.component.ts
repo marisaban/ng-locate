@@ -26,17 +26,21 @@ export class ListBranchesComponent implements OnInit {
   p: number = 1;
   hideme = [];
 
-  cities = [];
-  searchTerms = [];
+  // changes it to obj
+  // searchTerms = [];
 
   isLoading: boolean = true;
+  isSearching: boolean = false;
 
   // userinput should be saved to this variable 
   // or the search ts file should have a variable and if it isn't '' then it should be called into this 
   searchTerm: any = [];
   userInput: string;
 
+  // from input field on component 
   formVar: FormGroup;
+
+  createList: any;
 
   constructor(private branchAPIService: BranchAPIService, public cityNamePipe: CityNamePipe, private fb: FormBuilder) { }
 
@@ -62,21 +66,34 @@ export class ListBranchesComponent implements OnInit {
       this.isLoading = false;
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(record => {
-        console.log(searchTerm[0].searchterm, record.Name);
-        if(userInput == record.Name) {
-          console.log("it matches");
-        } else {
-          console.log("nah");
-        }
+        //console.log(searchTerm[0].searchterm, record.Name);
+        // if(userInput == record.Name) {
+        //   console.log("it matches");
+        // } else {
+        //   console.log("nah");
+        // }
       })
+      userInput = '';
     })
   }
 
-  onSubmit() {
-    console.log("submit!");
+  search() {
+    // print out input
+   //console.log('search', this.formVar.value);
+
     this.searchTerm.push(this.formVar.value);
-    // take object and insert in searchTerm array 
-    this.getDataFromAPI(this.searchTerm);
+
+    for (let i = 0; i < this.searchTerm.length; i++) {
+      console.log('your input is', this.searchTerm[i]);
+      
+      this.isSearching = true;
+      
+    }
+    
+    // if array is not empty then match
+    if(this.searchTerm.length >= 1) {
+      this.getDataFromAPI(this.searchTerm);
+    }
   }
 
   assignRecord(record) {
@@ -84,11 +101,6 @@ export class ListBranchesComponent implements OnInit {
     this.branches.push(record._recordName);
     return this.branches;
   }
-
-  // matchCity(record) {
-  //   record._cityName = record.Name;
-  //   this.cities.push(record._cityName);
-  // }
 }
 
   
