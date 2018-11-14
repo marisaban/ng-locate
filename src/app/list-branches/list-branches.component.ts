@@ -27,7 +27,6 @@ export class ListBranchesComponent implements OnInit {
   hideme = [];
 
   isLoading: boolean = true;
-  isSearching: boolean = false;
 
   // userinput should be saved to this variable 
   // or the search ts file should have a variable and if it isn't '' then it should be called into this 
@@ -40,8 +39,6 @@ export class ListBranchesComponent implements OnInit {
 
   // from input field on component 
   formVar: FormGroup;
-
-  createList: any;
 
   constructor(private branchAPIService: BranchAPIService, public cityNamePipe: CityNamePipe, private fb: FormBuilder) { }
 
