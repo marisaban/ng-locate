@@ -2,16 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { BranchAPIService } from '../service/branch-api.service';
 
-import { CityNamePipe } from '../pipe/city-name.pipe';
-
+// separate into search comoponent afterwards
 import { FormBuilder, FormGroup } from '@angular/forms';
-
-interface myData {
-  data: any,
-  brand: any,
-  branch: any,
-  postaladdress: any;
-}
 
 @Component({
   selector: 'app-list-branches',
@@ -22,6 +14,9 @@ interface myData {
 export class ListBranchesComponent implements OnInit {
 
   records = [];
+// for testing
+  filteredRecords: any = [];
+
   branches = [];
   p: number = 1;
   hideme = [];
@@ -34,13 +29,17 @@ export class ListBranchesComponent implements OnInit {
   userInput: string;
   keyword: string;
 
-  cities: any = [];
   filters: any = [];
+
+  // for testing
+  cities: any = [];
+  
 
   // from input field on component 
   formVar: FormGroup;
 
-  constructor(private branchAPIService: BranchAPIService, public cityNamePipe: CityNamePipe, private fb: FormBuilder) { }
+  constructor(private branchAPIService: BranchAPIService, 
+              private fb: FormBuilder) { }
 
   ngOnInit() {
     this.branchAPIService.getData()
@@ -57,6 +56,7 @@ export class ListBranchesComponent implements OnInit {
     });
   }
 
+  // to match the user input with the city name (will remove after testing)
   getDataFromAPI(keyword) {
     // convert to array
     this.searchTerm.push(keyword);
@@ -64,27 +64,29 @@ export class ListBranchesComponent implements OnInit {
     console.log("userinput provided is", this.userInput);
     this.branchAPIService.getData()
     .subscribe(data => {
-      this.isLoading = false;
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(filter => {
-        this.filters = this.getCity(filter);
-        // needs to return city names  but doesn't because of the template
-       // console.log(this.filters, 'then user input', this.userInput);
-        //console.log(this.filters.includes(this.userInput));
 
-        if (this.filters.includes(this.userInput)) {
-          console.log('WHERE ARE YOU', this.filters.indexOf(this.userInput));
-        }
+        // returns cities
+        this.filters = this.getCity(filter);
+
+        // needs to return city names  but doesn't because of the template
+        //console.log(this.filters, 'then user input', this.userInput);
+        console.log(this.filters.includes(this.userInput));
+
+        // stops working when filter calls service
+        // if (this.filters.includes(this.userInput)) {
+        //   console.log('WHERE ARE YOU', this.filters.indexOf(this.userInput));
+        // }
       })
-      keyword = '';
     })
   }
 
   search() {
     this.keyword = this.formVar.value;
-    
     if(this.keyword !== '') {
       this.getDataFromAPI(this.keyword);
+      this.keyword = '';
     }
   }
 
@@ -94,6 +96,7 @@ export class ListBranchesComponent implements OnInit {
     return this.branches;
   }
 
+  // remove after testing
   getCity(filter) {
     filter._recordName = filter.Name;
     this.cities.push(filter._recordName);

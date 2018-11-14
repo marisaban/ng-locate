@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BranchAPIService } from './service/branch-api.service';
+// refactor code to utilize the service
 import { BranchListService } from './service/branch-list.service';
 
 import { AppComponent } from './app.component';
@@ -13,15 +14,13 @@ import { ViewBranchMapComponent } from './view-branch-map/view-branch-map.compon
 import { AgmCoreModule } from '@agm/core';
 import { SearchBranchesComponent } from './search-branches/search-branches.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CityNamePipe } from './pipe/city-name.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListBranchesComponent,
     ViewBranchMapComponent,
-    SearchBranchesComponent,
-    CityNamePipe
+    SearchBranchesComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +34,7 @@ import { CityNamePipe } from './pipe/city-name.pipe';
   ],
   providers: [
     BranchAPIService,
-    BranchListService,
-    CityNamePipe
+    BranchListService
   ],
   bootstrap: [AppComponent]
 })
