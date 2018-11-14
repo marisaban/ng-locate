@@ -8,16 +8,15 @@
 
       <!-- search testing  -->
       <div class="input-search">
-        <form [formGroup]="formVar" >
-            <input type="text"  class="form-control"  placeholder="Enter in your city" formControlName="keyword"/> 
-            <button (click)="search($event)">Search</button> 
-        </form>
+          <input type="text" placeholder="Enter in your city" [(ngModel)]="keyword"/> 
+          <button (click)="search($event)">Search</button> 
       </div>
 
-      <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
-        <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record.Name  }}  - {{ record.PostalAddress.AddressLine }} </a></li>
+      <!-- replacing records with filteredRecords -->
+      <ul class="list-branches" *ngFor="let record of filteredRecords | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
+        <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record.Name  }}  -  </a></li>
                 
-        <div class="branch-details" [hidden]="!hideme[i]">
+        <!-- <div class="branch-details" [hidden]="!hideme[i]">
           <p> <span class="label">Address: </span> {{ record.PostalAddress.AddressLine }}, {{ record.PostalAddress.TownName }}, {{ record.PostalAddress.PostCode }}, {{ record.PostalAddress.CountrySubDivision }}, {{ record.PostalAddress.Country }}</p> 
           <p> <span class="label">Contact Information: </span> </p>
                     
@@ -29,7 +28,7 @@
           <div class="hours" *ngFor="let record of records; let i = index">
           <p *ngIf="i<5">  <span class="label"> {{ record.Availability.StandardAvailability.Day[i].Name }}: </span>  </p>
           </div>
-        </div>
+        </div> -->
 
       </ul>
     </div>

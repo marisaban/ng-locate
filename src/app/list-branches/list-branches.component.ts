@@ -18,75 +18,86 @@ export class ListBranchesComponent implements OnInit {
   filteredRecords: any = [];
 
   branches = [];
-  p: number = 1;
   hideme = [];
 
   isLoading: boolean = true;
 
   // userinput should be saved to this variable 
-  // or the search ts file should have a variable and if it isn't '' then it should be called into this 
-  searchTerm: any = [];
-  userInput: string;
-  keyword: string;
+  private _keyword: string;
+  // getter
+  get keyword(): string {
+    return this._keyword;
+  }
+  // setter
+  set keyword(value: string) {
+    this._keyword = value;
+    this.filteredRecords = this.filterCities(value);
+  }
 
-  filters: any = [];
+  filterCities(searchString: string) {
+    // return this.filteredRecords.filter(record => 
+    //   record.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
 
-  // for testing
-  cities: any = [];
-  
-
-  // from input field on component 
-  formVar: FormGroup;
-
-  constructor(private branchAPIService: BranchAPIService, 
-              private fb: FormBuilder) { }
-
-  ngOnInit() {
     this.branchAPIService.getData()
     .subscribe(data => {
       this.isLoading = false;
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(record => {
-        this.records = this.assignRecord(record);
+         //this.records = this.assignRecord(record);
+        this.filteredRecords = this.assignRecord(record);
+
+        //console.log(record.Name);
+        return this.filteredRecords.filter(record => 
+          record.Name.indexOf(searchString) !== -1);
       })
     })
 
-    this.formVar = this.fb.group({
-      keyword: '',
-    });
+  }
+
+  filters: any = [];
+
+  // for testing
+  cities: any = [];
+
+  constructor(private branchAPIService: BranchAPIService, 
+              private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.getBranches();
+  }
+
+  // getData from api call
+  getBranches() {
+    this.branchAPIService.getData()
+    .subscribe(data => {
+      this.isLoading = false;
+      const branchObj = data.data[0].Brand[0].Branch;
+      branchObj.forEach(record => {
+         //this.records = this.assignRecord(record);
+        this.filteredRecords = this.getCity(record);
+      })
+    })
   }
 
   // to match the user input with the city name (will remove after testing)
-  getDataFromAPI(keyword) {
-    // convert to array
-    this.searchTerm.push(keyword);
-    this.userInput = this.searchTerm[0].keyword; 
-    console.log("userinput provided is", this.userInput);
+  getDataFromAPI(_keyword) {
     this.branchAPIService.getData()
     .subscribe(data => {
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(filter => {
-
         // returns cities
         this.filters = this.getCity(filter);
-
-        // needs to return city names  but doesn't because of the template
-        //console.log(this.filters, 'then user input', this.userInput);
-        console.log(this.filters.includes(this.userInput));
-
         // stops working when filter calls service
-        // if (this.filters.includes(this.userInput)) {
-        //   console.log('WHERE ARE YOU', this.filters.indexOf(this.userInput));
-        // }
+        if (this.filters.includes(this._keyword)) {
+          console.log('WHERE ARE YOU', this.filters.indexOf(this._keyword));
+        }
       })
     })
   }
 
   search() {
-    this.keyword = this.formVar.value;
     if(this.keyword !== '') {
-      this.getDataFromAPI(this.keyword);
-      this.keyword = '';
+      this.getDataFromAPI(this._keyword);
     }
   }
 
