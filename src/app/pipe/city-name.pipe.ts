@@ -5,12 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CityNamePipe implements PipeTransform {
 
-  transform(cities: any, searchText: any): any {
-    if(searchText == null) return cities;
+  // receive param list we want to filter and the searchterm string
+  transform() {
 
-    return cities.filter(function(city){
-      return city.CityName.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
-    })
   }
 
 }
