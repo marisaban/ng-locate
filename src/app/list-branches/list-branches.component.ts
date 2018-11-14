@@ -33,6 +33,10 @@ export class ListBranchesComponent implements OnInit {
   // or the search ts file should have a variable and if it isn't '' then it should be called into this 
   searchTerm: any = [];
   userInput: string;
+  keyword: string;
+
+  cities: any = [];
+  filters: any = [];
 
   // from input field on component 
   formVar: FormGroup;
@@ -56,46 +60,34 @@ export class ListBranchesComponent implements OnInit {
     });
   }
 
-  getDataFromAPI(searchTerm) {
-    let userInput =  searchTerm[0].searchterm;
+  getDataFromAPI(keyword) {
+    // convert to array
+    this.searchTerm.push(keyword);
+    this.userInput = this.searchTerm[0].keyword; 
+    console.log("userinput provided is", this.userInput);
     this.branchAPIService.getData()
     .subscribe(data => {
       this.isLoading = false;
       const branchObj = data.data[0].Brand[0].Branch;
-      branchObj.forEach(record => {
-        //console.log(searchTerm[0].searchterm, record.Name);
-        // if(userInput == record.Name) {
-        //   console.log("it matches");
-        // } else {
-        //   console.log("nah");
-        // }
+      branchObj.forEach(filter => {
+        this.filters = this.getCity(filter);
+        // needs to return city names  but doesn't because of the template
+       // console.log(this.filters, 'then user input', this.userInput);
+        //console.log(this.filters.includes(this.userInput));
+
+        if (this.filters.includes(this.userInput)) {
+          console.log('WHERE ARE YOU', this.filters.indexOf(this.userInput));
+        }
       })
-      userInput = '';
+      keyword = '';
     })
   }
 
   search() {
-    // print out input
-   //console.log('search', this.formVar.value);
-
-    this.searchTerm.push(this.formVar.value);
-
-    console.log('my new array', this.searchTerm);
-
-    //join
-    this.searchTerm.join();
-
-    console.log('joined array', this.searchTerm);
-
-    for (let i = 0; i < this.searchTerm.length; i++) {
-     // console.log('your input is', this.searchTerm[i]);
-      this.isSearching = true;
-      
-    }
+    this.keyword = this.formVar.value;
     
-    // if array is not empty then match
-    if(this.searchTerm.length >= 1) {
-      this.getDataFromAPI(this.searchTerm);
+    if(this.keyword !== '') {
+      this.getDataFromAPI(this.keyword);
     }
   }
 
@@ -103,6 +95,12 @@ export class ListBranchesComponent implements OnInit {
     record._recordName = record;
     this.branches.push(record._recordName);
     return this.branches;
+  }
+
+  getCity(filter) {
+    filter._recordName = filter.Name;
+    this.cities.push(filter._recordName);
+    return this.cities;
   }
 }
 
