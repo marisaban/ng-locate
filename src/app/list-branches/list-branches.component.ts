@@ -21,8 +21,10 @@ export class ListBranchesComponent implements OnInit {
   hideme = [];
 
   isLoading: boolean = true;
+  isSearching: boolean = false;
 
   // userinput should be saved to this variable 
+  // or the search ts file should have a variable and if it isn't '' then it should be called into this 
   keyword: string;
 
   filters: any = [];
@@ -39,8 +41,7 @@ export class ListBranchesComponent implements OnInit {
       this.isLoading = false;
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(record => {
-         this.records = this.assignRecord(record);
-       // this.filteredRecords = this.getCity(record);
+        this.records = this.assignRecord(record);
       })
     })
   }
@@ -55,13 +56,23 @@ export class ListBranchesComponent implements OnInit {
         this.filters = this.getCity(filter);
         // stops working when filter calls service
         if (this.filters.includes(this.keyword)) {
-          console.log('WHERE ARE YOU', this.filters.indexOf(this.keyword));
+          // get index
+          console.log(this.filters.indexOf(keyword));
+          let index = this.filters.indexOf(keyword);
+
+          // modify array in template
+          //console.log(this.filters.splice(index));
+          
+          this.filteredRecords = this.assignRecord(filter);
+
+          
         }
       })
     })
   }
 
   search() {
+    this.isSearching = !this.isSearching;
     if(this.keyword !== '') {
       this.getDataFromAPI(this.keyword);
     }
