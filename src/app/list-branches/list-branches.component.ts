@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { BranchAPIService } from '../service/branch-api.service';
 
-// separate into search comoponent afterwards
-import { FormBuilder, FormGroup } from '@angular/forms';
-
 @Component({
   selector: 'app-list-branches',
   templateUrl: './list-branches.component.html',
@@ -23,6 +20,7 @@ export class ListBranchesComponent implements OnInit {
 
   isLoading: boolean = true;
   isSearching: boolean = false;
+  notFound: boolean = false;
 
   // userinput should be saved to this variable 
   // or the search ts file should have a variable and if it isn't '' then it should be called into this 
@@ -54,7 +52,9 @@ export class ListBranchesComponent implements OnInit {
       branchObj.forEach(filter => {
 
         if(filter.Name == this.keyword){
-          console.log(this.filteredRecords.push(filter.Name));
+          this.filteredRecords.push(filter);
+        }else {
+
         }
 
       })
@@ -62,8 +62,11 @@ export class ListBranchesComponent implements OnInit {
   }
 
   search() {
-    this.isSearching = !this.isSearching;
-    if(this.keyword !== '') {
+    if(this.keyword == undefined || null) {
+      alert('You must type in a value first');
+    } else {
+      this.isSearching = !this.isSearching;
+      this.notFound = !this.notFound;
       this.getDataFromAPI(this.keyword);
     }
   }

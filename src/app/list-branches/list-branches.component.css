@@ -11,10 +11,19 @@
     padding: 10px;
 }
 
+.list-branches li:hover {
+    box-shadow: 1px 4px #dcdbdb;
+    background: #71a0cf26;
+}
+
 .list-branches li a {
     display: block;
     width: 100%;
     color: #71A0CF;
+}
+
+.list-branches li a:hover {
+    text-decoration: none;
 }
 
 .branch-details{
@@ -30,7 +39,11 @@
 
 span.label {
     font-weight: bold;
-    color: #001154;
+    color: #a5a4a0;
+}
+
+p {
+    color: #a5a4a0;
 }
 
 .loading-gif {
@@ -41,14 +54,23 @@ span.label {
 /* testing purposes */
 input {
     width: 600px;
+    height: 35px;
 }
 
 button {
     width: 125px;
+    background: #71A0CF;
+    color: white;
+}
+
+button:hover {
+    box-shadow: 3px 3px #dcdbdb;
+    cursor: pointer;
 }
 
 .input-search {
     display: inline-flex;
+    margin: 25px 0;
 }
 
 ul.list-search {

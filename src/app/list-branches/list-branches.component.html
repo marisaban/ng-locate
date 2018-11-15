@@ -27,7 +27,7 @@
           
             <p> <span class="label">Working Hours: </span> </p>
             <div class="hours" *ngFor="let record of records; let i = index">
-            <p *ngIf="i<5">  <span class="label"> {{ record.Availability.StandardAvailability.Day[i].Name }}: </span>  </p>
+            <p *ngIf="i<5">  <span class="label"> {{ record.Availability.StandardAvailability.Day[i].Name }}: {{ record.Availability.StandardAvailability.Day[i].OpeningHours[0].OpeningTime }} - {{ record.Availability.StandardAvailability.Day[i].OpeningHours[0].ClosingTime }} </span>  </p>
             </div>
           </div>
         </ul>
@@ -35,23 +35,27 @@
       
       <!-- display filtered branches if keyword is entered  -->
       <div *ngIf="isSearching">
-          <p>SEARCHING</p> 
+        <p class="searching-label">SEARCHING</p> 
+
+        <div *ngIf="notFound">
+          <p class="search-notfound">Sorry, we cannot find that. </p>
+        </div>
       <ul class="list-branches"  *ngFor="let filter of filteredRecords | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
-        <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ filter }}   </a></li>
+        <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ filter.Name  }}  - {{ filter.PostalAddress.AddressLine }} </a></li>
                   
-          <!-- <div class="branch-details" [hidden]="!hideme[i]">
+          <div class="branch-details" [hidden]="!hideme[i]">
             <p> <span class="label">Address: </span> {{ filter.PostalAddress.AddressLine }}, {{ filter.PostalAddress.TownName }}, {{ filter.PostalAddress.PostCode }}, {{ filter.PostalAddress.CountrySubDivision }}, {{ filter.PostalAddress.Country }}</p> 
             <p> <span class="label">Contact Information: </span> </p>
                       
-            <div class="hours" *ngFor="let record of records; let i = index">
-              <p *ngIf="i<2">  <span class="label"> {{ record.ContactInfo[i].ContactType }} </span> {{ record.ContactInfo[i].ContactContent }} </p>
+            <div class="hours" *ngFor="let filter of filteredRecords; let i = index">
+              <p *ngIf="i<2">  <span class="label"> {{ filter.ContactInfo[i].ContactType }} </span> {{ filter.ContactInfo[i].ContactContent }} </p>
             </div>
           
             <p> <span class="label">Working Hours: </span> </p>
-            <div class="hours" *ngFor="let record of records; let i = index">
-            <p *ngIf="i<5">  <span class="label"> {{ record.Availability.StandardAvailability.Day[i].Name }}: </span>  </p>
+            <div class="hours" *ngFor="let filter of filteredRecords; let i = index">
+            <p *ngIf="i<5">  <span class="label"> {{ filter.Availability.StandardAvailability.Day[i].Name }}: {{ filter.Availability.StandardAvailability.Day[i].OpeningHours[0].OpeningTime }} - {{ filter.Availability.StandardAvailability.Day[i].OpeningHours[0].ClosingTime }}  </span>  </p>
             </div>
-          </div> -->
+          </div>
 
         </ul>
       </div>
