@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListBranchesComponent } from './list-branches.component';
+import { BranchAPIService } from './../service/branch-api.service';
+
 
 describe('ListBranchesComponent', () => {
   let component: ListBranchesComponent;
@@ -8,7 +10,7 @@ describe('ListBranchesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListBranchesComponent ]
+      declarations: [ ListBranchesComponent, BranchAPIService ]
     })
     .compileComponents();
   }));
