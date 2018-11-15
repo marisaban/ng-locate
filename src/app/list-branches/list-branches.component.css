@@ -51,7 +51,6 @@ p {
     margin: 0 auto;
 }
 
-/* testing purposes */
 input {
     width: 600px;
     height: 35px;
@@ -71,6 +70,11 @@ button:hover {
 .input-search {
     display: inline-flex;
     margin: 25px 0;
+}
+
+.input-label {
+    margin-top: -20px;
+    font-size: 10px;
 }
 
 ul.list-search {

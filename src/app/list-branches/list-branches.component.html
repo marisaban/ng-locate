@@ -10,7 +10,8 @@
           <input type="text" placeholder="Enter in your city" [(ngModel)]="keyword" (keyup.enter)="search()"/> 
           <button (click)="search($event)">Search</button> 
       </div>
-
+      <p class="input-label">Clear the input to restart your search</p>
+      
       <div *ngIf="!isSearching">
       <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 35, currentPage: p } let i = index">
           <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record.Name  }}  - {{ record.PostalAddress.AddressLine }} </a></li>
