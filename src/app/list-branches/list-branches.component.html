@@ -8,11 +8,11 @@
 
       <div class="input-search">
           <input type="text" placeholder="Enter in your city" [(ngModel)]="keyword"/> 
-          <button id="search-button" (click)="search($event)">Search</button> 
+          <button (click)="search($event)">Search</button> 
       </div>
 
       <div *ngIf="!isSearching">
-      <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
+      <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 35, currentPage: p } let i = index">
           <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record.Name  }}  - {{ record.PostalAddress.AddressLine }} </a></li>
                   
           <div class="branch-details" [hidden]="!hideme[i]">
@@ -35,7 +35,7 @@
         <div *ngIf="notFound">
           <p class="search-notfound">Sorry, we cannot find that. </p>
         </div>
-      <ul class="list-branches"  *ngFor="let filter of filteredRecords | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
+      <ul class="list-branches"  *ngFor="let filter of filteredRecords | paginate: { itemsPerPage: 35, currentPage: p } let i = index">
         <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ filter.Name  }}  - {{ filter.PostalAddress.AddressLine }} </a></li>
                   
           <div class="branch-details" [hidden]="!hideme[i]">
@@ -47,8 +47,9 @@
             </div>
           
             <p> <span class="label">Working Hours: </span> </p>
-            <div class="hours" *ngFor="let filter of filteredRecords; let i = index">
-            <p *ngIf="i<5">  <span class="label"> {{ filter.Availability.StandardAvailability.Day[i].Name }}: {{ filter.Availability.StandardAvailability.Day[i].OpeningHours[0].OpeningTime }} - {{ filter.Availability.StandardAvailability.Day[i].OpeningHours[0].ClosingTime }}  </span>  </p>
+
+            <div class="hours" *ngFor="let record of records; let i = index">
+              <p *ngIf="i<5">  <span class="label"> {{ filter.Availability.StandardAvailability.Day[i].Name }}: {{ filter.Availability.StandardAvailability.Day[i].OpeningHours[0].OpeningTime }} - {{ filter.Availability.StandardAvailability.Day[i].OpeningHours[0].ClosingTime }} </span>  </p>
             </div>
           </div>
 

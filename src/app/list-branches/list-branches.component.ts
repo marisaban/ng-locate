@@ -18,7 +18,6 @@ export class ListBranchesComponent implements OnInit {
   isSearching: boolean = false;
   notFound: boolean = false;
 
-
   keyword: string;
   filters: any = [];
   filteredRecords: any = [];
@@ -26,6 +25,10 @@ export class ListBranchesComponent implements OnInit {
   constructor(private branchAPIService: BranchAPIService) { }
 
   ngOnInit() {
+    this.getList();
+  }
+
+  getList() {
     this.branchAPIService.getData()
     .subscribe(data => {
       this.isLoading = false;
@@ -36,15 +39,27 @@ export class ListBranchesComponent implements OnInit {
     })
   }
 
+  assignRecord(record) {
+    record._recordName = record;
+    this.branches.push(record._recordName);
+    return this.branches;
+  }
+
   getMatch(keyword) {
+    this.keyword = this.keyword.toUpperCase();
     this.branchAPIService.getData()
     .subscribe(data => {
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(filter => {
-        if(filter.Name == this.keyword){
-          this.filteredRecords.push(filter);
-          this.keyword = '';
-        }else {
+        if(filter.Name.includes(this.keyword)) {
+         for (let i = 0; i <=5; i++) {
+           if (filter.Name[i] == this.keyword[i]) {
+              this.filteredRecords.pop();
+              this.filteredRecords.push(filter);
+           }
+          }
+        } 
+        else {
           this.notFound = !this.notFound;
         }
       })
@@ -58,12 +73,6 @@ export class ListBranchesComponent implements OnInit {
       this.isSearching = !this.isSearching;
       this.getMatch(this.keyword);
     }
-  }
-
-  assignRecord(record) {
-    record._recordName = record;
-    this.branches.push(record._recordName);
-    return this.branches;
   }
 
 }
