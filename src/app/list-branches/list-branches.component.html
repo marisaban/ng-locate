@@ -37,7 +37,7 @@
       <div *ngIf="isSearching">
           <p>SEARCHING</p> 
       <ul class="list-branches"  *ngFor="let filter of filteredRecords | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
-        <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ filter.Name  }}   </a></li>
+        <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ filter }}   </a></li>
                   
           <!-- <div class="branch-details" [hidden]="!hideme[i]">
             <p> <span class="label">Address: </span> {{ filter.PostalAddress.AddressLine }}, {{ filter.PostalAddress.TownName }}, {{ filter.PostalAddress.PostCode }}, {{ filter.PostalAddress.CountrySubDivision }}, {{ filter.PostalAddress.Country }}</p> 

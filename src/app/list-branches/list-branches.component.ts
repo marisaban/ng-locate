@@ -19,6 +19,7 @@ export class ListBranchesComponent implements OnInit {
 
   branches = [];
   hideme = [];
+  filteredPoots = [];
 
   isLoading: boolean = true;
   isSearching: boolean = false;
@@ -32,8 +33,7 @@ export class ListBranchesComponent implements OnInit {
   // for testing
   cities: any = [];
 
-  constructor(private branchAPIService: BranchAPIService, 
-              private fb: FormBuilder) { }
+  constructor(private branchAPIService: BranchAPIService) { }
 
   ngOnInit() {
     this.branchAPIService.getData()
@@ -52,21 +52,11 @@ export class ListBranchesComponent implements OnInit {
     .subscribe(data => {
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(filter => {
-        // returns cities
-        this.filters = this.getCity(filter);
-        // stops working when filter calls service
-        if (this.filters.includes(this.keyword)) {
-          // get index
-          console.log(this.filters.indexOf(keyword));
-          let index = this.filters.indexOf(keyword);
 
-          // modify array in template
-          //console.log(this.filters.splice(index));
-          
-          this.filteredRecords = this.assignRecord(filter);
-
-          
+        if(filter.Name == this.keyword){
+          console.log(this.filteredRecords.push(filter.Name));
         }
+
       })
     })
   }
@@ -84,12 +74,6 @@ export class ListBranchesComponent implements OnInit {
     return this.branches;
   }
 
-  // remove after testing
-  getCity(filter) {
-    filter._recordName = filter.Name;
-    this.cities.push(filter._recordName);
-    return this.cities;
-  }
 }
 
   
