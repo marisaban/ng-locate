@@ -6,13 +6,11 @@
         <img src="../../assets/gif-loading.gif" />    
       </div>
 
-      <!-- search testing  -->
       <div class="input-search">
           <input type="text" placeholder="Enter in your city" [(ngModel)]="keyword"/> 
-          <button (click)="search($event)">Search</button> 
+          <button id="search-button" (click)="search($event)">Search</button> 
       </div>
 
-      <!-- replacing records with filteredRecords -->
       <div *ngIf="!isSearching">
       <ul class="list-branches" *ngFor="let record of records | paginate: { itemsPerPage: 50, currentPage: p } let i = index">
           <li><a href="#" (click)="hideme[i] = !hideme[i]" > {{ record.Name  }}  - {{ record.PostalAddress.AddressLine }} </a></li>
@@ -33,10 +31,7 @@
         </ul>
       </div>
       
-      <!-- display filtered branches if keyword is entered  -->
       <div *ngIf="isSearching">
-        <p class="searching-label">SEARCHING</p> 
-
         <div *ngIf="notFound">
           <p class="search-notfound">Sorry, we cannot find that. </p>
         </div>

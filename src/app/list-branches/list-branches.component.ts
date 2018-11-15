@@ -11,25 +11,17 @@ import { BranchAPIService } from '../service/branch-api.service';
 export class ListBranchesComponent implements OnInit {
 
   records = [];
-// for testing
-  filteredRecords: any = [];
-
   branches = [];
   hideme = [];
-  filteredPoots = [];
 
   isLoading: boolean = true;
   isSearching: boolean = false;
   notFound: boolean = false;
 
-  // userinput should be saved to this variable 
-  // or the search ts file should have a variable and if it isn't '' then it should be called into this 
+
   keyword: string;
-
   filters: any = [];
-
-  // for testing
-  cities: any = [];
+  filteredRecords: any = [];
 
   constructor(private branchAPIService: BranchAPIService) { }
 
@@ -44,19 +36,17 @@ export class ListBranchesComponent implements OnInit {
     })
   }
 
-  // to match the user input with the city name (will remove after testing)
-  getDataFromAPI(keyword) {
+  getMatch(keyword) {
     this.branchAPIService.getData()
     .subscribe(data => {
       const branchObj = data.data[0].Brand[0].Branch;
       branchObj.forEach(filter => {
-
         if(filter.Name == this.keyword){
           this.filteredRecords.push(filter);
+          this.keyword = '';
         }else {
-
+          this.notFound = !this.notFound;
         }
-
       })
     })
   }
@@ -66,8 +56,7 @@ export class ListBranchesComponent implements OnInit {
       alert('You must type in a value first');
     } else {
       this.isSearching = !this.isSearching;
-      this.notFound = !this.notFound;
-      this.getDataFromAPI(this.keyword);
+      this.getMatch(this.keyword);
     }
   }
 
